@@ -15,8 +15,6 @@ namespace CompAppsCheatingDetector {
         FileInfo fOne;
         FileInfo fTwo;
 
-        Boolean isMatch = false;
-
         List<string> info = new List<string>();
 
         public Match(Suspect one, FileInfo fOne, Suspect two, FileInfo fTwo) {

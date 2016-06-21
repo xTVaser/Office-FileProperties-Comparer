@@ -10,7 +10,7 @@ namespace CompAppsCheatingDetector {
 
         string name;
         List<FileInfo> fileList = new List<FileInfo>();
-        List<Suspect> matchList = new List<Suspect>();
+        List<Match> matchList = new List<Match>();
 
         public Suspect(string name) {
             this.name = name;
@@ -21,7 +21,7 @@ namespace CompAppsCheatingDetector {
             fileList.Add(file);
         }
 
-        public void addMatch(Suspect match) {
+        public void addMatch(Match match) {
 
             matchList.Add(match);
         }
@@ -30,7 +30,7 @@ namespace CompAppsCheatingDetector {
             return name;
         }
 
-        public List<Suspect> getMatches() {
+        public List<Match> getMatches() {
             return matchList;
         }
 
