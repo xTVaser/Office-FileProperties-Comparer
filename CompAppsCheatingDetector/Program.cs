@@ -50,11 +50,60 @@ namespace CompAppsCheatingDetector {
             }
         }
 
-        static void suspectIterator(Suspect s) {
+        static void suspectIterator(List<Suspect> suspects) {
 
+            for (int i = 0; i < suspects.Count-1; i++) { //For each suspect except the last one
+                
+                foreach(FileInfo f in suspects[i].getFiles()) { //That suspects file lists.
+
+                    fileIterator(f, i + 1, suspects, suspects[i]); //Combine each parent file to every other parent file.
+                }
+            }
+
+        }
+
+        static void fileIterator(FileInfo f1, int index, List<Suspect> suspects, Suspect s) {
+
+            for(int i = index;  i < suspects.Count; i++) {
+
+                foreach(FileInfo f2 in suspects[i].getFiles()) {
+
+                    if (checkExtension(f1) == FILETYPE_OTHER || checkExtension(f2) == FILETYPE_OTHER) //If either are wrong 
+                        matchNormalFiles(f1, f2, s, suspects[i]);
+                    else if (checkExtension(f1) == FILETYPE_OFFICE || checkExtension(f2) == FILETYPE_OFFICE) //If they are both office files
+                        matchOfficeFiles(f1, f2, s, suspects[i]);
+                }
+            }
+        }
+
+        readonly static int FILETYPE_OFFICE = 1;
+        readonly static int FILETYPE_OTHER = 2;
+
+        static int checkExtension(FileInfo file) {
+
+            Console.WriteLine(file.Extension);
+            if (file.Extension.Equals(".docx") || file.Extension.Equals(".doc")) //Its a word document\
+                return FILETYPE_OFFICE;
+
+            else if (file.Extension.Equals(".xls") || file.Extension.Equals(".xlm") || file.Extension.Equals(".xlsx")) //Its an excel document
+                return FILETYPE_OFFICE;
+
+            else if (file.Extension.Equals(".ppt") || file.Extension.Equals(".pptx")) //Its a powerpoint document
+                return FILETYPE_OFFICE;
+
+            return FILETYPE_OTHER;
+        }
+
+        static void matchNormalFiles(FileInfo f1, FileInfo f2, Suspect s1, Suspect s2) {
 
 
         }
+
+        static void matchOfficeFiles(FileInfo f1, FileInfo f2, Suspect s1, Suspect s2) {
+
+
+        }
+
         static List<Suspect> parseSuspects(List<FileInfo> files) {
            
             List<Suspect> suspects = new List<Suspect>();
@@ -84,28 +133,7 @@ namespace CompAppsCheatingDetector {
 
             MessageBox.Show("Files found: " + files.Count.ToString(), "Message");
 
-            return suspects;/
-        }
-
-        static void compareOfficeDocuments(OpenXmlPackage document) {
-            
-            Console.WriteLine(file.Extension);
-            if (file.Extension.Equals(".docx") || file.Extension.Equals(".doc") { //Its a word document
-
-            }
-
-            else if (file.Extension.Equals(".xls") || file.Extension.Equals(".xlm") || file.Extension.Equals(".xlsx")) { //Its an excel document
-
-            }
-
-            else if (file.Extension.Equals(".ppt") || file.Extension.Equals(".pptx")) { //Its a powerpoint document
-
-            }
-
-            else {
-
-
-            }
+            return suspects;
         }
     }
 }
