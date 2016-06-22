@@ -195,7 +195,6 @@ namespace CompAppsCheatingDetector {
                     fileIterator(f, i + 1, suspects, suspects[i]); //Combine each parent file to every other parent file.
                 }
             }
-
         }
 
         static void fileIterator(FileInfo f1, int index, List<Suspect> suspects, Suspect s) {
