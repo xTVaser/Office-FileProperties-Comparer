@@ -9,13 +9,13 @@ namespace CompAppsCheatingDetector {
 
     public class Match {
 
-        Suspect sOne;
-        Suspect sTwo;
+        public Suspect sOne { get; set; }
+        public Suspect sTwo { get; set; }
+    
+        public FileInfo fOne { get; set; }
+        public FileInfo fTwo { get; set; }
 
-        FileInfo fOne;
-        FileInfo fTwo;
-
-        List<string> info = new List<string>();
+        public List<string> info { get; set; } = new List<string>();
 
         public Match(Suspect one, FileInfo fOne, Suspect two, FileInfo fTwo) {
 
@@ -29,16 +29,6 @@ namespace CompAppsCheatingDetector {
         public void addInfo(string msg) {
 
             info.Add(msg);
-        }
-
-        public Suspect getFirstSuspect() {
-
-            return sOne;
-        }
-
-        public Suspect getSecondSuspect() {
-
-            return sTwo;
         }
     }
 }
